@@ -1,4 +1,4 @@
-//verify the jwt token
+ //verify the jwt token
 //also check user for admin
 const User = require("../models/userModel");
 const jwt =  require("jsonwebtoken");
@@ -29,16 +29,4 @@ const authMiddleware = asyncHandler(async(req,res,next)=>{
     }
 });
 
-//for admin authorization
-const isAdmin = asyncHandler(async(req,res,next)=>{
-    const {email} =req.user;
-    const adminUser = await User.findOne({email});
-    if(adminUser.role!=='admin')
-    {
-        throw new Error("You are not an Admin. Access Denied!");
-    }
-    else{
-        next();
-    }
-})
-module.exports = {authMiddleware,isAdmin};
+module.exports = {authMiddleware};
