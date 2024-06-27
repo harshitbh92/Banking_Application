@@ -24,11 +24,12 @@ app.use(cookieParser());
 const authRouter = require('./routes/userRoute');
 const applicationRouter = require('./routes/ApplicationRoutes');
 const EmploymentRouter = require('./routes/EmploymentRoutes');
+const LoginRouter = require('./routes/LoginRoute');
 
 app.use('/api/user', authRouter);
 app.use('/api/application',applicationRouter);
 app.use('/api/application/employment',EmploymentRouter);
-
+app.use('/api/application/login',LoginRouter);
 
 // Handle 404 errors
 app.use(notFound);
