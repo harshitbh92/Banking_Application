@@ -62,7 +62,33 @@ var userSchema = new mongoose.Schema({
           refreshToken :{
             type: String,
         },
-    }
+    },
+    ApplicationId: {
+        type: String,
+        unique: true
+      },
+      OnlineCredentialCreated: {
+        type: Boolean,
+        default: false
+      },
+      employmentStatus: {
+        type: String,
+        enum: ['Full-time employed', 'Part-time employed', 'Self-employed', 'Retired', 'Student', 'Not in employment'],
+        required: true
+      },
+      industry: {
+        type: String,
+        required: true
+      },
+      occupation: {
+        type: String,
+        required: true
+      },
+      annualIncome: {
+        type: String,
+        enum: ['£0-£24,999', '£25,000-£49,999', '£50,000-£99,999', '£100,000-£149,999', '£150,000+'],
+        required: true
+      }
 },
 {
     timestamps:true

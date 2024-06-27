@@ -23,8 +23,12 @@ app.use(cookieParser());
 // Import and use routes
 const authRouter = require('./routes/userRoute');
 const applicationRouter = require('./routes/ApplicationRoutes');
+const EmploymentRouter = require('./routes/EmploymentRoutes');
+
 app.use('/api/user', authRouter);
 app.use('/api/application',applicationRouter);
+app.use('/api/application/employment',EmploymentRouter);
+
 
 // Handle 404 errors
 app.use(notFound);
