@@ -1,9 +1,9 @@
 const mongoose = require('mongoose'); // Erase if already required
 
 // Function to generate a random ApplicationId
-const generateApplicationId = () => {
-  return 'APP-' + Math.random().toString(36).substr(2, 9).toUpperCase();
-}
+// const generateApplicationId = () => {
+//   return 'APP-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+// }
 
 // Declare the Schema of the Mongo model
 var ApplicationSchema = new mongoose.Schema({
@@ -59,10 +59,6 @@ var ApplicationSchema = new mongoose.Schema({
       type: String
     },
   },
-  ApplicationId: {
-    type: String,
-    unique: true
-  },
   OnlineCredentialCreated: {
     type: Boolean,
     default: false
@@ -72,23 +68,23 @@ var ApplicationSchema = new mongoose.Schema({
 });
 
 // Pre-save hook to generate unique ApplicationId
-ApplicationSchema.pre('save', async function (next) {
-  const application = this;
+// ApplicationSchema.pre('save', async function (next) {
+//   const application = this;
 
-  // Generate a new ApplicationId if it's a new document
-  if (application.isNew) {
-    let isUnique = false;
-    while (!isUnique) {
-      const newId = generateApplicationId();
-      const existingApp = await mongoose.models.Application.findOne({ ApplicationId: newId });
-      if (!existingApp) {
-        application.ApplicationId = newId;
-        isUnique = true;
-      }
-    }
-  }
-  next();
-});
+//   // Generate a new ApplicationId if it's a new document
+//   if (application.isNew) {
+//     let isUnique = false;
+//     while (!isUnique) {
+//       const newId = generateApplicationId();
+//       const existingApp = await mongoose.models.Application.findOne({ ApplicationId: newId });
+//       if (!existingApp) {
+//         application.ApplicationId = newId;
+//         isUnique = true;
+//       }
+//     }
+//   }
+//   next();
+// });
 
 // Export the model
 module.exports = mongoose.model('Application', ApplicationSchema);
